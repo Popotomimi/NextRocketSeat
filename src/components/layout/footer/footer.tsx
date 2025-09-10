@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Logo from "../logo/logo";
+import Logo from "../../logo/logo";
 
 const Footer = () => {
   return (
