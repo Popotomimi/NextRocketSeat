@@ -1,13 +1,8 @@
-import Header from "@/components/layout/header/header";
+import BlogList from "@/components/templates/blog/blog-list";
 import React from "react";
 
 const BlogPage = () => {
-  return (
-    <div>
-      <Header />
-      BlogPage
-    </div>
-  );
+  return <BlogList />;
 };
 
 export default BlogPage;
