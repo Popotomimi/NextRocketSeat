@@ -11,6 +11,7 @@ import { allPosts } from "contentlayer/generated";
 import Image from "next/image";
 import { Avatar } from "@/components/avatar";
 import Markdown from "@/components/markdown/markdown";
+import { Button } from "@/components/ui/button";
 
 const PostPage = () => {
   const router = useRouter();
@@ -55,7 +56,11 @@ const PostPage = () => {
               </h1>
 
               <Avatar.Container>
-                <Avatar.Image src={post?.author.avatar} alt={post?.title} />
+                <Avatar.Image
+                  src={post?.author.avatar}
+                  alt={post?.title}
+                  size="sm"
+                />
                 <Avatar.Content>
                   <Avatar.Title>{post?.title}</Avatar.Title>
                   <Avatar.Description>
@@ -70,6 +75,25 @@ const PostPage = () => {
               <Markdown content={post.body.raw} />
             </div>
           </article>
+
+          <aside className="space-y-6">
+            <div className="rounded-lg bg-gray-700 p-4 md:p-6">
+              <h2 className="mb-4 text-heading-xs text-gray-100">
+                Compartilhar
+              </h2>
+
+              <div className="space-y-3">
+                {[{ key: "1", providerName: "Linkedin" }].map((provider) => (
+                  <Button
+                    key={provider.key}
+                    variant={"outline"}
+                    className="w-full justify-start gap-2">
+                    {provider.providerName}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </main>
