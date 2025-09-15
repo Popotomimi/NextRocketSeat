@@ -12,6 +12,7 @@ import Image from "next/image";
 import { Avatar } from "@/components/avatar";
 import Markdown from "@/components/markdown/markdown";
 import { Button } from "@/components/ui/button";
+import { useShare } from "@/hooks/use-share/use-share";
 
 const PostPage = () => {
   const router = useRouter();
@@ -20,6 +21,13 @@ const PostPage = () => {
     (post) => post.slug.toLowerCase() === slug.toLowerCase()
   )!;
   const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR");
+  const postUrl = `https://site.site/blog/${slug}`;
+
+  const { shareButtons } = useShare({
+    url: postUrl,
+    title: post.title,
+    text: post.description,
+  });
 
   return (
     <main className="mt-32">
@@ -77,18 +85,20 @@ const PostPage = () => {
           </article>
 
           <aside className="space-y-6">
-            <div className="rounded-lg bg-gray-700 p-4 md:p-6">
+            <div className="rounded-lg bg-gray-700 px-4 md:px-6">
               <h2 className="mb-4 text-heading-xs text-gray-100">
                 Compartilhar
               </h2>
 
               <div className="space-y-3">
-                {[{ key: "1", providerName: "Linkedin" }].map((provider) => (
+                {shareButtons.map((provider) => (
                   <Button
-                    key={provider.key}
+                    key={provider.provider}
+                    onClick={() => provider.action()}
                     variant={"outline"}
                     className="w-full justify-start gap-2">
-                    {provider.providerName}
+                    {provider.icon}
+                    {provider.name}
                   </Button>
                 ))}
               </div>

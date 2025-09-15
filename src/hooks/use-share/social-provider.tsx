@@ -2,9 +2,16 @@ import { Facebook, Linkedin, Slack, Twitter } from "lucide-react";
 
 export type ShareConfig = {
   url: string;
-  title: string;
+  title?: string;
   text?: string;
 };
+
+export type SocialProvider =
+  | "linkedin"
+  | "facebook"
+  | "slack"
+  | "twitter"
+  | "clipboard";
 
 export const SOCIAL_PROVIDERS = {
   linkedin: {
