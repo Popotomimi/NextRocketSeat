@@ -21,7 +21,7 @@ const ptSansCaption = PT_Sans_Caption({
 const Layout = ({ children }: LayoutProps) => {
   return (
     <html lang="pt-BR">
-      <body>
+      <body className="text-gray-100">
         <div
           className={`${
             inter.className

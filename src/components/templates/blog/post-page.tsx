@@ -10,8 +10,7 @@ import { Post as Poste } from "contentlayer/generated";
 import Image from "next/image";
 import { Avatar } from "@/components/avatar";
 import Markdown from "@/components/markdown/markdown";
-import { Button } from "@/components/ui/button";
-import { useShare } from "@/hooks/use-share/use-share";
+import PostShare from "./components/post-share/post-share";
 
 export type PostPageProps = {
   post: Poste;
@@ -20,12 +19,6 @@ export type PostPageProps = {
 const Post = ({ post }: PostPageProps) => {
   const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR");
   const postUrl = `https://site.site/blog/${post.slug}`;
-
-  const { shareButtons } = useShare({
-    url: postUrl,
-    title: post.title,
-    text: post.description,
-  });
 
   return (
     <main className="mt-32">
@@ -82,26 +75,7 @@ const Post = ({ post }: PostPageProps) => {
             </div>
           </article>
 
-          <aside className="space-y-6">
-            <div className="rounded-lg bg-gray-700 px-4 md:px-6">
-              <h2 className="hidden md:block mb-4 text-heading-xs text-gray-100">
-                Compartilhar
-              </h2>
-
-              <div className="flex justify-between md:flex-col gap-2">
-                {shareButtons.map((provider) => (
-                  <Button
-                    key={provider.provider}
-                    onClick={() => provider.action()}
-                    variant={"outline"}
-                    className="w-fit md:w-full justify-start gap-2">
-                    {provider.icon}
-                    <span className="hidden md:block ">{provider.name}</span>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </aside>
+          <PostShare url={postUrl} title={post.title} text={post.description} />
         </div>
       </div>
     </main>
