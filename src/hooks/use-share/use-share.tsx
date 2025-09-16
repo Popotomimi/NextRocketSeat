@@ -5,7 +5,7 @@ import {
   SocialProvider,
 } from "./social-provider";
 import { useClipboard } from "../use-clipboard/use-clipboard";
-import { Link2 } from "lucide-react";
+import { Link } from "lucide-react";
 
 type UseShareProps = ShareConfig & {
   clipboardTimeout?: number;
@@ -68,7 +68,7 @@ export const useShare = ({
       {
         provider: "clipboard",
         name: isCopied ? "Link Copiado!" : "Copiar Link",
-        icon: <Link2 className="h-4 w-4" />,
+        icon: <Link className="h-4 w-4" />,
         action: () => share("clipboard"),
       },
     ],

@@ -1,6 +1,7 @@
 import { Inter, PT_Sans_Caption } from "next/font/google";
 import Footer from "./footer/footer";
 import Header from "./header/header";
+import CallToAction from "../templates/landing-page/sections/call-to-action/call-to-action";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -19,14 +20,19 @@ const ptSansCaption = PT_Sans_Caption({
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div
-      className={`${
-        inter.className
-      } ${`${ptSansCaption.className}`} relative flex min-h-screen flex-col bg-gray-700 font-inter`}>
-      <Header />
-      <main className="flex-1 flex flex-col mt-10 mb-12">{children}</main>
-      <Footer />
-    </div>
+    <html lang="pt-BR">
+      <body>
+        <div
+          className={`${
+            inter.className
+          } ${`${ptSansCaption.className}`} relative flex min-h-screen flex-col bg-gray-700 font-inter`}>
+          <Header />
+          <main className="flex-1 flex flex-col mt-10 mb-12">{children}</main>
+          <CallToAction />
+          <Footer />
+        </div>
+      </body>
+    </html>
   );
 };
 

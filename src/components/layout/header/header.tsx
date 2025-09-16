@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../../ui/button";
 import ActiveLink from "../../active-link/active-link";

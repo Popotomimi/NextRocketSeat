@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,21 +6,20 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import { allPosts } from "contentlayer/generated";
+import { Post as Poste } from "contentlayer/generated";
 import Image from "next/image";
 import { Avatar } from "@/components/avatar";
 import Markdown from "@/components/markdown/markdown";
 import { Button } from "@/components/ui/button";
 import { useShare } from "@/hooks/use-share/use-share";
 
-const PostPage = () => {
-  const router = useRouter();
-  const slug = router.query.slug as string;
-  const post = allPosts.find(
-    (post) => post.slug.toLowerCase() === slug.toLowerCase()
-  )!;
+export type PostPageProps = {
+  post: Poste;
+};
+
+const Post = ({ post }: PostPageProps) => {
   const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR");
-  const postUrl = `https://site.site/blog/${slug}`;
+  const postUrl = `https://site.site/blog/${post.slug}`;
 
   const { shareButtons } = useShare({
     url: postUrl,
@@ -86,19 +84,19 @@ const PostPage = () => {
 
           <aside className="space-y-6">
             <div className="rounded-lg bg-gray-700 px-4 md:px-6">
-              <h2 className="mb-4 text-heading-xs text-gray-100">
+              <h2 className="hidden md:block mb-4 text-heading-xs text-gray-100">
                 Compartilhar
               </h2>
 
-              <div className="space-y-3">
+              <div className="flex justify-between md:flex-col gap-2">
                 {shareButtons.map((provider) => (
                   <Button
                     key={provider.provider}
                     onClick={() => provider.action()}
                     variant={"outline"}
-                    className="w-full justify-start gap-2">
+                    className="w-fit md:w-full justify-start gap-2">
                     {provider.icon}
-                    {provider.name}
+                    <span className="hidden md:block ">{provider.name}</span>
                   </Button>
                 ))}
               </div>
@@ -110,4 +108,4 @@ const PostPage = () => {
   );
 };
 
-export default PostPage;
+export default Post;
